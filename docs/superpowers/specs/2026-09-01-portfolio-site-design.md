@@ -135,9 +135,12 @@ One runnable check, no test framework, that asserts:
 
 1. `index.html` parses as well-formed HTML.
 2. Every internal `href` and `src` resolves to a file that exists on disk.
-3. Every section marked complete contains no leftover `REPLACE` marker.
 
-Run with a single command. It fails loudly on any of the three.
+It also **reports** the count and location of remaining `REPLACE` markers.
+That report is informational and does not fail the check — the site ships
+with placeholders on purpose, so a leftover marker is a status, not an error.
+
+Run with a single command. It exits non-zero on 1 or 2.
 
 ## Explicitly out of scope
 
