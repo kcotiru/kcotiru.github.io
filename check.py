@@ -1,20 +1,29 @@
 #!/usr/bin/env python3
-"""Verify index.html: well-formed markup, resolvable internal links.
+"""Verify index.html: well-formed markup, no JavaScript, accessible headings
+and images, resolvable internal links.
 
 Run: python check.py
 Exits 0 if the page is valid, 1 otherwise. Remaining REPLACE placeholders
 are reported for information and never fail the check -- the site ships
 with placeholders on purpose.
 """
+import os
 import pathlib
 import re
 import sys
 from html.parser import HTMLParser
+from urllib.parse import unquote
 
 VOID = {
     "area", "base", "br", "col", "embed", "hr", "img", "input",
     "link", "meta", "param", "source", "track", "wbr",
 }
+
+# End tags HTML5 lets you omit. html.parser does no implied-end-tag handling,
+# so without this the stack desynchronizes and errors cascade.
+OPTIONAL_END = {"li", "p", "td", "tr", "option", "dt", "dd"}
+
+HEADINGS = {"h1", "h2", "h3", "h4", "h5", "h6"}
 
 
 class _Markup(HTMLParser):
@@ -24,29 +33,63 @@ class _Markup(HTMLParser):
         self.errors = []
         self.ids = set()
         self.links = []  # (attr_value, line)
+        self.h1_count = 0
+        self.last_level = 0
 
-    def handle_starttag(self, tag, attrs):
+    def _element(self, tag, attrs):
+        """Everything checked per element, however the tag was written."""
+        line = self.getpos()[0]
         d = dict(attrs)
+
         if "id" in d:
+            if d["id"] in self.ids:
+                self.errors.append(f'line {line}: duplicate id "{d["id"]}"')
             self.ids.add(d["id"])
+
         for key in ("href", "src"):
             if d.get(key):
-                self.links.append((d[key], self.getpos()[0]))
-        if tag not in VOID:
-            self.stack.append((tag, self.getpos()[0]))
+                self.links.append((d[key], line))
+
+        # no JavaScript on the page -- non-negotiable
+        if tag == "script":
+            self.errors.append(f"line {line}: <script> found; the page must contain no JavaScript")
+        for name in d:
+            if name.startswith("on"):
+                self.errors.append(
+                    f"line {line}: inline handler {name}=; the page must contain no JavaScript"
+                )
+
+        # accessibility -- non-negotiable
+        if tag == "img" and "alt" not in d:
+            self.errors.append(f"line {line}: <img> has no alt attribute (alt=\"\" if decorative)")
+        if tag in HEADINGS:
+            level = int(tag[1])
+            if level == 1:
+                self.h1_count += 1
+                if self.h1_count > 1:
+                    self.errors.append(f"line {line}: extra <h1>; the page must have exactly one")
+            if level > self.last_level + 1:
+                seen = f"<h{self.last_level}>" if self.last_level else "no heading"
+                self.errors.append(f"line {line}: <{tag}> skips a level (previous: {seen})")
+            self.last_level = level
+
+    def handle_starttag(self, tag, attrs):
+        self._element(tag, attrs)
+        if tag in VOID:
+            return
+        if tag in OPTIONAL_END and self.stack and self.stack[-1][0] == tag:
+            self.stack.pop()  # <li>a<li>b -- the first one implicitly closed
+        self.stack.append((tag, self.getpos()[0]))
 
     def handle_startendtag(self, tag, attrs):
         # <br /> style self-closing tags: record attrs, never push on the stack
-        d = dict(attrs)
-        if "id" in d:
-            self.ids.add(d["id"])
-        for key in ("href", "src"):
-            if d.get(key):
-                self.links.append((d[key], self.getpos()[0]))
+        self._element(tag, attrs)
 
     def handle_endtag(self, tag):
         if tag in VOID:
             return
+        while self.stack and self.stack[-1][0] != tag and self.stack[-1][0] in OPTIONAL_END:
+            self.stack.pop()  # </ul> implicitly closes the open <li>
         if not self.stack:
             self.errors.append(f"line {self.getpos()[0]}: stray </{tag}>")
             return
@@ -69,8 +112,29 @@ def _parse(html):
 
 
 def check_markup(html):
-    """Return a list of error strings for unbalanced or misnested tags."""
+    """Return errors for unbalanced tags, JavaScript, or accessibility faults."""
     return _parse(html)[1]
+
+
+def _resolves(root, path):
+    """True if path is a file whose on-disk name matches byte for byte.
+
+    Path.exists() follows the filesystem's case rules: Windows and macOS are
+    case-insensitive, the Linux host serving GitHub Pages is not. Compare each
+    component against the real directory listing so a case mismatch is caught
+    here rather than as a 404 after publishing.
+    """
+    cur = root
+    for part in path.split("/"):
+        if part in ("", "."):
+            continue
+        if part == "..":
+            cur = cur.parent
+            continue
+        if not cur.is_dir() or part not in os.listdir(cur):
+            return False
+        cur = cur / part
+    return cur.is_file()
 
 
 def check_links(html, root):
@@ -78,15 +142,19 @@ def check_links(html, root):
     parser, _ = _parse(html)
     errors = []
     for value, line in parser.links:
-        if re.match(r"^(https?:|mailto:|tel:|data:|//)", value):
+        if re.match(r"^(https?:|mailto:|tel:|data:|//)", value, re.IGNORECASE):
             continue
         if value.startswith("#"):
             if value[1:] and value[1:] not in parser.ids:
                 errors.append(f"line {line}: {value} matches no id on the page")
             continue
-        path = value.split("#")[0].split("?")[0]
-        if path and not (root / path).exists():
-            errors.append(f"line {line}: {path} does not exist")
+        path = unquote(value.split("#")[0].split("?")[0])
+        if not path:
+            continue
+        if path.startswith("/"):
+            errors.append(f"line {line}: {path} is absolute; every path must be relative")
+        elif not _resolves(root, path):
+            errors.append(f"line {line}: {path} does not exist (or differs in case)")
     return errors
 
 
@@ -113,14 +181,17 @@ def main():
 
     placeholders = find_placeholders(html)
     if placeholders:
-        print(f"\n{len(placeholders)} placeholder(s) still to fill:")
+        print(
+            f"\n{len(placeholders)} placeholder(s) still to fill "
+            f"-- DO NOT PUBLISH: this content is invented."
+        )
         for line, desc in placeholders:
             print(f"  index.html:{line}  {desc}")
 
     if errors:
         print(f"\n{len(errors)} error(s)")
         return 1
-    print("\nOK: markup well-formed, all internal links resolve")
+    print("\nOK: markup well-formed, no JavaScript, headings and images sound, links resolve")
     return 0
 
 

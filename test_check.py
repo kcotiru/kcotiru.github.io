@@ -70,6 +70,89 @@ def test_placeholders_are_found_with_line_numbers():
     assert find_placeholders(html) == [(2, "your name")]
 
 
+def test_implied_end_tags_are_allowed():
+    # </li>, </p> and friends are optional in HTML5
+    assert check_markup("<body><ul><li>a<li>b</ul></body>") == []
+    assert check_markup("<body><p>a<p>b</body>") == []
+
+
+def test_script_tag_is_reported():
+    errors = check_markup("<body><script>alert(1)</script></body>")
+    assert any("script" in e for e in errors)
+
+
+def test_inline_event_handler_is_reported():
+    errors = check_markup('<body><a onclick="x()">y</a></body>')
+    assert any("onclick" in e for e in errors)
+
+
+def test_img_without_alt_is_reported():
+    errors = check_markup('<body><img src="x.png"></body>')
+    assert any("alt" in e for e in errors)
+
+
+def test_empty_alt_is_allowed():
+    assert check_markup('<body><img src="x.png" alt=""></body>') == []
+
+
+def test_second_h1_is_reported():
+    errors = check_markup("<body><h1>a</h1><h1>b</h1></body>")
+    assert any("h1" in e for e in errors)
+
+
+def test_skipped_heading_level_is_reported():
+    errors = check_markup("<body><h1>a</h1><h3>b</h3></body>")
+    assert any("h3" in e for e in errors)
+
+
+def test_heading_levels_in_order_are_allowed():
+    html = "<body><h1>a</h1><h2>b</h2><h3>c</h3><h2>d</h2><h3>e</h3></body>"
+    assert check_markup(html) == []
+
+
+def test_duplicate_id_is_reported():
+    html = '<body><section id="a"></section><section id="a"></section></body>'
+    errors = check_markup(html)
+    assert any("duplicate" in e for e in errors)
+
+
+def test_case_mismatched_path_is_reported():
+    # Windows and macOS resolve STYLE.CSS to style.css; GitHub Pages will not.
+    # On a case-sensitive filesystem the file simply is not there -- either way
+    # an error is expected.
+    with tempfile.TemporaryDirectory() as d:
+        root = pathlib.Path(d)
+        (root / "style.css").write_text("")
+        errors = check_links('<body><a href="STYLE.CSS">x</a></body>', root)
+        assert any("STYLE.CSS" in e for e in errors)
+
+
+def test_directory_is_not_a_valid_link():
+    with tempfile.TemporaryDirectory() as d:
+        root = pathlib.Path(d)
+        (root / "assets").mkdir()
+        errors = check_links('<body><a href="assets">x</a></body>', root)
+        assert any("assets" in e for e in errors)
+
+
+def test_percent_encoded_path_resolves():
+    with tempfile.TemporaryDirectory() as d:
+        root = pathlib.Path(d)
+        (root / "assets").mkdir()
+        (root / "assets" / "my resume.pdf").write_text("")
+        html = '<body><a href="assets/my%20resume.pdf">r</a></body>'
+        assert check_links(html, root) == []
+
+
+def test_leading_slash_path_is_reported():
+    with tempfile.TemporaryDirectory() as d:
+        root = pathlib.Path(d)
+        (root / "style.css").write_text("")
+        errors = check_links('<body><a href="/style.css">x</a></body>', root)
+        assert any("/style.css" in e for e in errors)
+
+
+
 if __name__ == "__main__":
     passed = 0
     for name, fn in sorted(globals().items()):
