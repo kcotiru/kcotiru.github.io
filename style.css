@@ -320,6 +320,7 @@ ul { padding-left: 1.1em; }
 /* ---- hero grid wash ------------------------------------------------ */
 .hero {
   position: relative;
+  isolation: isolate; /* Scopes stacking context so .hero::before z-index: -1 is relative to .hero, not an ancestor */
 }
 
 .hero::before {
@@ -365,10 +366,6 @@ ul { padding-left: 1.1em; }
 }
 
 /* ---- card hover ------------------------------------------------------ */
-.card {
-  position: relative;
-}
-
 .card:hover,
 .card:focus-within {
   border-color: var(--accent);
@@ -389,11 +386,6 @@ ul { padding-left: 1.1em; }
 }
 
 /* ---- primary CTA hover cue -------------------------------------------- */
-.btn {
-  position: relative;
-  overflow: hidden;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .btn { transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease, transform 140ms ease; }
   .btn:hover, .btn:focus-visible { transform: translateX(2px); }
