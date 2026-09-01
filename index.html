@@ -56,6 +56,70 @@
     </p>
   </section>
 
+  <section class="section wrap" id="work" aria-labelledby="work-h">
+    <p class="eyebrow">Work</p>
+    <h2 id="work-h">Selected projects</h2>
+    <p class="section-lede">
+      <!-- REPLACE: one line framing what these projects have in common -->
+      Three things I built end to end, with the reasoning behind each.
+    </p>
+
+    <ul class="cards">
+      <!-- REPLACE: project 1 - name, what it does, why it mattered, links -->
+      <li class="card">
+        <h3 class="card-title">Retrieval service for internal docs</h3>
+        <p class="card-body">
+          A search API over ten years of internal documentation. Cut median
+          answer-finding time from minutes to seconds by pairing a vector index
+          with a strict citation requirement, so answers stay checkable.
+        </p>
+        <p class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">pgvector</span>
+        </p>
+        <p class="card-links">
+          <a href="https://github.com/kcotiru">Source</a>
+        </p>
+      </li>
+
+      <!-- REPLACE: project 2 - name, what it does, why it mattered, links -->
+      <li class="card">
+        <h3 class="card-title">Forecasting pipeline for demand planning</h3>
+        <p class="card-body">
+          Nightly pipeline producing per-SKU demand forecasts, with backtests
+          run on every model change. Replaced a spreadsheet process that took a
+          day each week.
+        </p>
+        <p class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Airflow</span>
+          <span class="tag">scikit-learn</span>
+        </p>
+        <p class="card-links">
+          <a href="https://github.com/kcotiru">Source</a>
+        </p>
+      </li>
+
+      <!-- REPLACE: project 3 - name, what it does, why it mattered, links -->
+      <li class="card">
+        <h3 class="card-title">Realtime dashboard for a small team</h3>
+        <p class="card-body">
+          A single-page operations view fed by a websocket stream. Built to be
+          boring on purpose: no framework, no state library, and no pager calls
+          in the eight months since.
+        </p>
+        <p class="tags">
+          <span class="tag">TypeScript</span>
+          <span class="tag">Postgres</span>
+        </p>
+        <p class="card-links">
+          <a href="https://github.com/kcotiru">Source</a>
+        </p>
+      </li>
+    </ul>
+  </section>
+
 </main>
 </body>
 </html>
