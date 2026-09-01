@@ -26,6 +26,10 @@ there. Search for `REPLACE` to find them all.
 
 ## Setup notes
 
+- **Do not push until `python check.py` reports zero placeholders.** Every
+  line under a `REPLACE` marker is invented filler — job titles, employers,
+  project write-ups, performance numbers. Publishing it puts fabricated
+  claims on the open web under your real name.
 - Repo must be named `kcotiru.github.io` to serve at the domain root.
 - Settings → Pages → deploy from `main`, `/` (root).
 - `.nojekyll` stops GitHub Pages from running the files through Jekyll.
