@@ -114,8 +114,13 @@ ul { padding-left: 1.1em; }
 .btn--ghost {
   background: transparent;
   color: var(--text);
-  border-color: var(--border);
+  /* --border is too faint to read as a boundary (1.4:1); AA wants 3:1 */
+  border-color: var(--muted);
 }
+
+/* colour changes, not motion -- reduced-motion users need them too */
+.btn:hover { background: transparent; color: var(--accent); }
+.btn--ghost:hover { border-color: var(--accent); color: var(--accent); }
 
 .visually-hidden {
   position: absolute;
@@ -145,8 +150,6 @@ ul { padding-left: 1.1em; }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
   .btn, a { transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease; }
-  .btn:hover { background: transparent; color: var(--accent); }
-  .btn--ghost:hover { border-color: var(--accent); color: var(--accent); }
 }
 
 /* ---- header ------------------------------------------------------ */
