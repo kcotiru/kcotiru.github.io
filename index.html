@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kcotiru — Software engineer, AI/ML</title>
+<!-- REPLACE: one sentence for search results and link previews -->
+<meta name="description" content="Software engineer working on machine learning systems, from data pipeline to deployed endpoint, looking for an engineering role.">
+<link rel="icon" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="wrap site-head">
+  <a class="site-mark" href="#main">kcotiru</a>
+  <nav aria-label="Sections">
+    <ul class="nav-list">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <section class="section wrap hero">
+    <!-- REPLACE: the small label above the headline, two or three words on your field -->
+    <p class="eyebrow">Software engineer &middot; AI/ML</p>
+    <!-- REPLACE: your role headline, one line, what you build and for whom -->
+    <h1>I build software that puts machine learning to work.</h1>
+    <!-- REPLACE: two sentences on what you do and the role you're looking for -->
+    <p class="hero-lede">
+      I design and ship backend systems and the models behind them &mdash;
+      from data pipeline to deployed endpoint. Currently looking for an
+      engineering role where that's the job.
+    </p>
+    <p class="hero-actions">
+      <a class="btn" href="#work">See the work</a>
+      <a class="btn btn--ghost" href="assets/resume.pdf">Download resume</a>
+    </p>
+  </section>
+
+  <section class="section wrap" id="about" aria-labelledby="about-h">
+    <p class="eyebrow">About</p>
+    <h2 id="about-h">Background</h2>
+    <!-- REPLACE: 3-4 sentences. Where you came from, what you are good at, what you are looking for. -->
+    <p>
+      I work across the whole path a model takes into production: shaping the
+      data, training and evaluating, then building the service that serves it
+      under real load. Most of my time goes to Python and TypeScript.
+    </p>
+    <p>
+      I care about systems that stay understandable a year after they ship,
+      which usually means fewer moving parts than the first design suggested.
+    </p>
+  </section>
+
+  <section class="section wrap" id="work" aria-labelledby="work-h">
+    <p class="eyebrow">Work</p>
+    <h2 id="work-h">Selected projects</h2>
+    <p class="section-lede">
+      <!-- REPLACE: one line framing what these projects have in common -->
+      Three things I built end to end, with the reasoning behind each.
+    </p>
+
+    <ul class="cards">
+      <!-- REPLACE: project 1 - name, what it does, why it mattered, links -->
+      <li class="card">
+        <h3 class="card-title">Retrieval service for internal docs</h3>
+        <p class="card-body">
+          A search API over ten years of internal documentation. Cut median
+          answer-finding time from minutes to seconds by pairing a vector index
+          with a strict citation requirement, so answers stay checkable.
+        </p>
+        <p class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">pgvector</span>
+        </p>
+        <p class="card-links">
+          <a href="https://github.com/kcotiru">Source</a>
+        </p>
+      </li>
+
+      <!-- REPLACE: project 2 - name, what it does, why it mattered, links -->
+      <li class="card">
+        <h3 class="card-title">Forecasting pipeline for demand planning</h3>
+        <p class="card-body">
+          Nightly pipeline producing per-SKU demand forecasts, with backtests
+          run on every model change. Replaced a spreadsheet process that took a
+          day each week.
+        </p>
+        <p class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Airflow</span>
+          <span class="tag">scikit-learn</span>
+        </p>
+        <p class="card-links">
+          <a href="https://github.com/kcotiru">Source</a>
+        </p>
+      </li>
+
+      <!-- REPLACE: project 3 - name, what it does, why it mattered, links -->
+      <li class="card">
+        <h3 class="card-title">Realtime dashboard for a small team</h3>
+        <p class="card-body">
+          A single-page operations view fed by a websocket stream. Built to be
+          boring on purpose: no framework, no state library, and no pager calls
+          in the eight months since.
+        </p>
+        <p class="tags">
+          <span class="tag">TypeScript</span>
+          <span class="tag">Postgres</span>
+        </p>
+        <p class="card-links">
+          <a href="https://github.com/kcotiru">Source</a>
+        </p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section wrap" id="experience" aria-labelledby="experience-h">
+    <p class="eyebrow">Experience</p>
+    <h2 id="experience-h">Where I have worked</h2>
+
+    <ol class="roles">
+      <!-- REPLACE: role 1 - title, employer, dates, two lines on what you did -->
+      <li class="role">
+        <p class="role-when">2023 &ndash; present</p>
+        <div class="role-what">
+          <h3>Software Engineer &middot; Company Name</h3>
+          <p>
+            Own the services behind the recommendation surface. Took p99 latency
+            from 800ms to 120ms by moving inference off the request path.
+          </p>
+        </div>
+      </li>
+
+      <!-- REPLACE: role 2 - title, employer, dates, two lines on what you did -->
+      <li class="role">
+        <p class="role-when">2021 &ndash; 2023</p>
+        <div class="role-what">
+          <h3>Backend Engineer &middot; Earlier Company</h3>
+          <p>
+            Built and maintained the data ingest for a customer-facing analytics
+            product, and the on-call runbooks that kept it quiet.
+          </p>
+        </div>
+      </li>
+    </ol>
+
+    <p><a class="btn btn--ghost" href="assets/resume.pdf">Download resume (PDF)</a></p>
+  </section>
+
+  <section class="section wrap" id="skills" aria-labelledby="skills-h">
+    <p class="eyebrow">Skills</p>
+    <h2 id="skills-h">What I work with</h2>
+    <p class="section-lede">
+      <!-- REPLACE: one line framing your technical range -->
+      The tools I reach for most, grouped by where they sit in the stack.
+    </p>
+
+    <div class="skill-groups">
+      <!-- REPLACE: languages you're proficient in -->
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <ul class="skill-list">
+          <li class="tag">Python</li>
+          <li class="tag">TypeScript</li>
+          <li class="tag">SQL</li>
+        </ul>
+      </div>
+
+      <!-- REPLACE: ML/AI tools and libraries you use -->
+      <div class="skill-group">
+        <h3>Machine learning</h3>
+        <ul class="skill-list">
+          <li class="tag">scikit-learn</li>
+          <li class="tag">pgvector</li>
+          <li class="tag">PyTorch</li>
+        </ul>
+      </div>
+
+      <!-- REPLACE: infrastructure, frameworks, and data tools you use -->
+      <div class="skill-group">
+        <h3>Infrastructure</h3>
+        <ul class="skill-list">
+          <li class="tag">FastAPI</li>
+          <li class="tag">Postgres</li>
+          <li class="tag">Airflow</li>
+          <li class="tag">Docker</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="contact" aria-labelledby="contact-h">
+    <p class="eyebrow">Contact</p>
+    <h2 id="contact-h">Get in touch</h2>
+    <p class="section-lede">
+      Best by email &mdash; I answer within a day or two.
+    </p>
+    <ul class="contact-list">
+      <!-- REPLACE: your real email address -->
+      <li><a href="mailto:kcotiru@gmail.com">kcotiru@gmail.com</a></li>
+      <!-- REPLACE: your GitHub profile URL -->
+      <li><a href="https://github.com/kcotiru">github.com/kcotiru</a></li>
+      <!-- REPLACE: your LinkedIn profile URL, or delete this line -->
+      <li><a href="https://www.linkedin.com/in/kcotiru">linkedin.com/in/kcotiru</a></li>
+    </ul>
+    <p class="contact-cta">
+      <!-- REPLACE: your real email address -->
+      <a class="btn" href="mailto:kcotiru@gmail.com?subject=Role%20enquiry">Email me about a role</a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="wrap site-foot">
+  <p>Built as plain HTML and CSS. <a href="https://github.com/kcotiru/kcotiru.github.io">Source</a>.</p>
+</footer>
+</body>
+</html>
