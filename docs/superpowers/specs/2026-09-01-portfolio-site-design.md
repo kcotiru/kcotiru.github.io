@@ -6,17 +6,19 @@
 
 ## Purpose
 
-A personal portfolio site hosted on GitHub Pages, serving two audiences at once:
-
-1. **Recruiters and hiring managers** evaluating kcotiru for employment.
-2. **Prospective freelance clients** evaluating kcotiru for contract work.
+A personal portfolio site hosted on GitHub Pages, aimed at a single audience:
+**recruiters and hiring managers** evaluating kcotiru for employment.
 
 The work shown is software engineering with an AI/ML component.
 
+Freelance-facing material (a Services section and its CTA) previously lived
+in this repo alongside the recruiter-facing content. That material has moved
+to a separate project; this site now serves the job-search audience only.
+
 ## Success criteria
 
-- A visitor of either audience can, within one screen of scrolling, tell what
-  kcotiru does and see a path to act on it.
+- A visitor can, within one screen of scrolling, tell what kcotiru does and
+  see a path to act on it.
 - The site loads and renders correctly with JavaScript disabled.
 - Publishing an update requires editing one HTML file and pushing. No build
   step, no CI, no dependency updates.
@@ -43,22 +45,19 @@ annoying, which is somewhere past the fourth project.
 
 One page, one column, sections in this order:
 
-| Section | Content | Serves |
-|---|---|---|
-| Hero | Name, one-line role statement, two CTAs: "See work" and "Hire me" | Both |
-| About | 3–4 sentences framing software engineering + AI/ML | Both |
-| Work | Project cards — descriptions, tech tags, links to repo/demo | Both |
-| Experience | Reverse-chronological roles, link to resume PDF | Recruiters |
-| Services | Freelance engagements offered, contact CTA | Clients |
-| Contact | Email (`mailto:`), GitHub, LinkedIn | Both |
+| Section | Content |
+|---|---|
+| Hero | Name, one-line role statement, two CTAs: "See work" and "Download resume" |
+| About | 3–4 sentences framing software engineering + AI/ML |
+| Work | Project cards — descriptions, tech tags, links to repo/demo |
+| Experience | Reverse-chronological roles, link to resume PDF |
+| Skills | Tech grouped by category (languages, ML, infrastructure) |
+| Contact | Email (`mailto:`), GitHub, LinkedIn, and a primary "email me about a role" CTA |
 
-The dual audience is handled by **splitting the call to action, not the
-evidence**. Both audiences want proof of building ability, so a single Work
-section serves both. They diverge only in what they do next, so Experience and
-Services sit after Work as two distinct exits.
-
-Rejected alternative: separate "for recruiters" and "for clients" pages. That
-duplicates the project content into two places that then drift apart.
+With one audience, the page makes a single case: proof of building ability
+(Work), a track record (Experience), range (Skills), and one clear way to
+act on it (the Contact CTA). There is no longer a need to split the call to
+action by audience.
 
 ## Files
 

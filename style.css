@@ -279,8 +279,6 @@ ul { padding-left: 1.1em; }
   .role-when { margin-top: 0; }
 }
 
-.services-cta { margin-top: var(--space-4); }
-
 /* ---- contact & footer -------------------------------------------- */
 .contact-list {
   list-style: none;
@@ -299,3 +297,23 @@ ul { padding-left: 1.1em; }
 }
 
 .site-foot p { margin: 0; max-width: none; }
+
+/* ---- skills -------------------------------------------------------- */
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: var(--space-4);
+}
+
+.skill-group h3 { margin-bottom: var(--space-2); }
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-cta { margin-top: var(--space-3); }
