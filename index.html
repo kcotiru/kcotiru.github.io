@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>kcotiru — Software engineer, AI/ML</title>
-<!-- REPLACE: one sentence for search results and link previews -->
-<meta name="description" content="Software engineer working on machine learning systems, from data pipeline to deployed endpoint, looking for an engineering role.">
+<title>Katriel Tiru — Software engineer, full-stack</title>
+<meta name="description" content="Full-stack software engineer building React and Next.js front ends, Node and Express services, and the PostgreSQL and background jobs behind them. Open to software engineering roles.">
 <link rel="icon" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +15,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="wrap site-head">
-  <a class="site-mark" href="#main">kcotiru</a>
+  <a class="site-mark" href="#main">Katriel Tiru</a>
   <nav aria-label="Sections">
     <ul class="nav-list">
       <li><a href="#work">Work</a></li>
@@ -30,16 +29,13 @@
 <main id="main" tabindex="-1">
 
   <section class="section wrap hero">
-    <!-- REPLACE: the small label above the headline, two or three words on your field -->
-    <p class="eyebrow">Software engineer &middot; AI/ML</p>
-    <!-- REPLACE: your role headline, one line, what you build and for whom -->
-    <!-- NOTE: the span below wraps "machine learning" in the placeholder headline for a typographic effect (mono face). If the headline is rewritten, re-wrap the relevant words in the new copy or drop the span. -->
-    <h1>I build software that puts <span class="ml-mono">machine learning</span> to work.</h1>
-    <!-- REPLACE: two sentences on what you do and the role you're looking for -->
+    <p class="eyebrow">Software engineer &middot; Full stack developer &middot; AI/ML</p>
+    <!-- NOTE: the span below wraps "end to end" in the headline for a typographic effect (mono face). -->
+    <h1>I build full-stack web applications <span class="hl-mono">end to end</span>.</h1>
     <p class="hero-lede">
-      I design and ship backend systems and the models behind them &mdash;
-      from data pipeline to deployed endpoint. Currently looking for an
-      engineering role where that's the job.
+      I build full-stack web applications: React and Next.js front ends, Node and Express
+      services, and the background jobs and PostgreSQL behind them. Computer Science graduate
+      looking for a software engineering role where I can ship production features.
     </p>
     <p class="hero-actions">
       <a class="btn" href="#work">See the work</a>
@@ -50,15 +46,18 @@
   <section class="section wrap" id="about" aria-labelledby="about-h">
     <p class="eyebrow">About</p>
     <h2 id="about-h">Background</h2>
-    <!-- REPLACE: 3-4 sentences. Where you came from, what you are good at, what you are looking for. -->
     <p>
-      I work across the whole path a model takes into production: shaping the
-      data, training and evaluating, then building the service that serves it
-      under real load. Most of my time goes to Python and TypeScript.
+      I'm a Computer Science graduate who builds web applications end to end — front end,
+      services, data, and the jobs running in between.
     </p>
     <p>
-      I care about systems that stay understandable a year after they ship,
-      which usually means fewer moving parts than the first design suggested.
+      Most of what I've built lately watches something and acts on it: an uptime monitor that
+      checks endpoints every thirty seconds, an aquarium system that alerts on sensor
+      readings, an importer that took manual re-entry out of an onboarding workflow.
+    </p>
+    <p>
+      I work in Agile teams with CI/CD, and I care about code that's clean enough for someone
+      else to review and tested enough to trust.
     </p>
   </section>
 
@@ -66,61 +65,63 @@
     <p class="eyebrow">Work</p>
     <h2 id="work-h">Selected projects</h2>
     <p class="section-lede">
-      <!-- REPLACE: one line framing what these projects have in common -->
-      Three things I built end to end, with the reasoning behind each.
+      Three things I built end to end, and what each one had to get right.
     </p>
 
     <ul class="cards">
-      <!-- REPLACE: project 1 - name, what it does, why it mattered, links -->
       <li class="card">
-        <h3 class="card-title">Retrieval service for internal docs</h3>
+        <h3 class="card-title">UptimeKit — uptime and performance monitoring</h3>
         <p class="card-body">
-          A search API over ten years of internal documentation. Cut median
-          answer-finding time from minutes to seconds by pairing a vector index
-          with a strict citation requirement, so answers stay checkable.
+          A self-hosted Pingdom alternative. A BullMQ worker checks endpoints every 30 seconds,
+          logs outages with their duration and cause, and alerts Slack, Discord, or webhooks. A
+          three-tier rollup pipeline (raw → hourly → daily) keeps the p50/p95/p99
+          latency charts fast and storage flat, with tenants isolated by PostgreSQL row-level
+          security, SSRF blocking, and Vitest integration tests.
         </p>
         <p class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">FastAPI</span>
-          <span class="tag">pgvector</span>
-        </p>
-        <p class="card-links">
-          <a href="https://github.com/kcotiru">Source</a>
-        </p>
-      </li>
-
-      <!-- REPLACE: project 2 - name, what it does, why it mattered, links -->
-      <li class="card">
-        <h3 class="card-title">Forecasting pipeline for demand planning</h3>
-        <p class="card-body">
-          Nightly pipeline producing per-SKU demand forecasts, with backtests
-          run on every model change. Replaced a spreadsheet process that took a
-          day each week.
-        </p>
-        <p class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">Airflow</span>
-          <span class="tag">scikit-learn</span>
-        </p>
-        <p class="card-links">
-          <a href="https://github.com/kcotiru">Source</a>
-        </p>
-      </li>
-
-      <!-- REPLACE: project 3 - name, what it does, why it mattered, links -->
-      <li class="card">
-        <h3 class="card-title">Realtime dashboard for a small team</h3>
-        <p class="card-body">
-          A single-page operations view fed by a websocket stream. Built to be
-          boring on purpose: no framework, no state library, and no pager calls
-          in the eight months since.
-        </p>
-        <p class="tags">
+          <span class="tag">Next.js 14</span>
           <span class="tag">TypeScript</span>
-          <span class="tag">Postgres</span>
+          <span class="tag">BullMQ</span>
+          <span class="tag">Redis</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Supabase PostgreSQL</span>
         </p>
         <p class="card-links">
-          <a href="https://github.com/kcotiru">Source</a>
+          <a href="https://github.com/kcotiru/UptimeKit">Source</a>
+        </p>
+      </li>
+
+      <li class="card">
+        <h3 class="card-title">REST URL — URL shortening service</h3>
+        <p class="card-body">
+          A full-stack URL shortener with auto-generated nanoid codes, user-defined custom
+          slugs, and atomic access tracking, served by a layered REST API (controller →
+          service → repository) with Zod request validation.
+        </p>
+        <p class="tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">React</span>
+          <span class="tag">Vite</span>
+          <span class="tag">Supabase PostgreSQL</span>
+        </p>
+        <p class="card-links">
+          <a href="https://github.com/kcotiru/REST-URL">Source</a>
+        </p>
+      </li>
+
+      <li class="card">
+        <h3 class="card-title">Aquarium monitoring — undergraduate thesis</h3>
+        <p class="card-body">
+          A real-time monitoring system on Raspberry Pi pairing a CNN fish-behaviour recognition
+          model with live water-quality sensors. Automated threshold alerts and a mobile
+          dashboard let owners act on an abnormal reading or behaviour as it happens.
+        </p>
+        <p class="tags">
+          <span class="tag">Raspberry Pi</span>
+          <span class="tag">CNN</span>
+          <span class="tag">Sensors</span>
         </p>
       </li>
     </ul>
@@ -131,26 +132,29 @@
     <h2 id="experience-h">Where I have worked</h2>
 
     <ol class="roles">
-      <!-- REPLACE: role 1 - title, employer, dates, two lines on what you did -->
       <li class="role">
-        <p class="role-when">2023 &ndash; present</p>
+        <p class="role-when">Jun 2026 &ndash; present</p>
         <div class="role-what">
-          <h3>Software Engineer &middot; Company Name</h3>
+          <h3>AI Model Evaluator &middot; DataAnnotation</h3>
           <p>
-            Own the services behind the recommendation surface. Took p99 latency
-            from 800ms to 120ms by moving inference off the request path.
+            Independent contractor, remote. Run head-to-head evaluations of frontier large
+            language models on unfamiliar public repositories chosen for real-world complexity,
+            judging which of two outputs is stronger against structured rubrics for correctness,
+            instruction-following, and developer experience.
           </p>
         </div>
       </li>
 
-      <!-- REPLACE: role 2 - title, employer, dates, two lines on what you did -->
       <li class="role">
-        <p class="role-when">2021 &ndash; 2023</p>
+        <p class="role-when">Jan 2026 &ndash; May 2026</p>
         <div class="role-what">
-          <h3>Backend Engineer &middot; Earlier Company</h3>
+          <h3>Software Engineer Intern &middot; TwistResources Inc.</h3>
           <p>
-            Built and maintained the data ingest for a customer-facing analytics
-            product, and the on-call runbooks that kept it quiet.
+            Delivered TwistHRM features across two Agile sprints, with review-approved code that
+            integrated into the existing CI/CD pipeline. Built an automated import service that
+            normalised external CSV formats into the platform schema, removing manual re-entry
+            from onboarding, and an image processing utility that sped up page loads without
+            altering original file integrity.
           </p>
         </div>
       </li>
