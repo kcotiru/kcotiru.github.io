@@ -310,7 +310,7 @@ ul { padding-left: 1.1em; }
 .contact-cta { margin-top: var(--space-3); }
 
 /* ---- typographic signature --------------------------------------- */
-.ml-mono {
+.hl-mono {
   font-family: var(--font-mono);
   font-size: 0.82em;
   letter-spacing: 0;
